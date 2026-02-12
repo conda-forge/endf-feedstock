@@ -1,5 +1,5 @@
 {% set name = "endf" %}
-{% set version = "0.1.11" %}
+{% set version = "0.1.12" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/endf-{{ version }}.tar.gz
-  sha256: c2543f3af1282d23a0c9272c033fd6584c25a31e8d8eeef26ef14e0e97284c1f
+  sha256: 97ca1b7a248fcc26c58a9f6a825e48b6643c8a6e111733440ada0ae425d45a68
 
 build:
   skip: true  # [py<38]

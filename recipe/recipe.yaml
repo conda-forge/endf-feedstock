@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  version: "0.1.12"
+
+package:
+  name: endf
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/e/endf/endf-${{ version }}.tar.gz
+  sha256: 97ca1b7a248fcc26c58a9f6a825e48b6643c8a6e111733440ada0ae425d45a68
+
+build:
+  number: 2
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - ${{ stdlib("c") }}
+    - ${{ compiler("cxx") }}
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - pybind11
+  host:
+    - python
+    - setuptools
+    - pybind11
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - numpy
+    - uncertainties
+
+tests:
+  - python:
+      imports:
+        - endf
+      pip_check: true
+
+about:
+  summary: Python interface to ENDF-6 files
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/paulromano/endf-python
+  repository: https://github.com/paulromano/endf-python
+  documentation: https://endf-python.readthedocs.io/
+
+extra:
+  recipe-maintainers:
+    - paulromano
+    - shimwell
